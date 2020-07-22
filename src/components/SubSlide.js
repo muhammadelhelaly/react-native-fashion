@@ -2,14 +2,14 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import Button from "./Button";
-import colors from "../../config/colors";
+import theme from "../../config/theme";
 
 function SubSlide({ subtitle, description, last, onPress }) {
   return (
     <View style={styles.container}>
       <View style={styles.title_descContainer}>
-        <Text style={styles.subtitle}>{subtitle}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text style={theme.text.subtitle}>{subtitle}</Text>
+        <Text style={theme.text.description}>{description}</Text>
       </View>
       <Button
         label={last ? "Let's get started" : "Next"}
@@ -29,19 +29,6 @@ const styles = StyleSheet.create({
   },
   title_descContainer: {
     alignItems: "center"
-  },
-  subtitle: {
-    fontFamily: "SF-Pro-semi",
-    fontSize: 24,
-    color: colors.dark,
-    marginBottom: 12
-  },
-  description: {
-    fontFamily: "SF-Pro",
-    fontSize: 18,
-    lineHeight: 24,
-    color: colors.dark,
-    textAlign: "center"
   }
 });
 

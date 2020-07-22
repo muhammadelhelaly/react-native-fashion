@@ -1,3 +1,4 @@
 export default Object.freeze({
-  ONBOARDING: "OnBoarding"
+  ONBOARDING: "OnBoarding",
+  WELCOME: "Welcome"
 });

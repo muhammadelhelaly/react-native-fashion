@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
-import colors from "../../config/colors";
+
+import theme from "./../../config/theme";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,7 +22,7 @@ function Slide({ title, right, image }) {
       </View>
 
       <View style={[styles.styleContainer, { transform }]}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={theme.text.hero}>{title}</Text>
       </View>
     </View>
   );
@@ -32,13 +33,6 @@ const styles = StyleSheet.create({
   styleContainer: {
     height: 100,
     justifyContent: "center"
-  },
-  title: {
-    fontSize: 80,
-    lineHeight: 80,
-    fontFamily: "SF-Pro-bold",
-    color: colors.white,
-    textAlign: "center"
   },
   underlay: {
     ...StyleSheet.absoluteFillObject,
