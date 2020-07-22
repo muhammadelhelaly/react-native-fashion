@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+
+import "react-native-gesture-handler";
+import { NavigationContainer } from "@react-navigation/native";
+import AuthNavigator from "./navigation/AuthNavigator";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+
+const loadFonts = async () => {
+  await Font.loadAsync({
+    "SF-Pro": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+    "SF-Pro-simi": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+    "SF-Pro-bold": require("./assets/fonts/SF-Pro-Text-Bold.otf")
+  });
+};
 
 export default function App() {
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+  if (!assetsLoaded) {
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setAssetsLoaded(true)}
+        //onError={() => console.log("Erroooor!")}
+      />
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
