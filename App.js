@@ -9,7 +9,7 @@ import * as Font from "expo-font";
 const loadFonts = async () => {
   await Font.loadAsync({
     "SF-Pro": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
-    "SF-Pro-simi": require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+    "SF-Pro-semi": require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
     "SF-Pro-bold": require("./assets/fonts/SF-Pro-Text-Bold.otf")
   });
 };
