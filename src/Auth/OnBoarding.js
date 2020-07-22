@@ -1,12 +1,18 @@
 import React, { useRef } from "react";
 import { View, StyleSheet, Dimensions, StatusBar } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useValue, onScrollEvent, interpolateColor } from "react-native-redash";
-import Animated, { multiply } from "react-native-reanimated";
+import {
+  useValue,
+  onScrollEvent,
+  interpolateColor,
+  useScrollHandler
+} from "react-native-redash";
+import Animated, { multiply, divide } from "react-native-reanimated";
 
 import Slide, { SLIDE_HEIGHT } from "./../components/Slide";
 import SubSlide from "../components/SubSlide";
 import colors from "../../config/colors";
+import Dot from "../components/Dot";
 
 const { width } = Dimensions.get("window");
 
@@ -45,8 +51,7 @@ const BORDER_RADIUS = 75;
 
 function OnBoarding() {
   const scroll = useRef(null);
-  const x = useValue(0);
-  const onScroll = onScrollEvent({ x });
+  const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
     inputRange: slides.map((_, i) => i * width), //[0, width, width * 2, width * 3],
     outputRange: slides.map(slide => slide.color) //["#BFEAF5", "#BEECC4", "#FFE4D9", "#FFDDDD"]
@@ -63,44 +68,47 @@ function OnBoarding() {
           decelerationRate="fast"
           showsHorizontalScrollIndicator={false}
           bounces={false}
-          scrollEventThrottle={1}
-          {...{ onScroll }}
+          {...scrollHandler}
         >
           {slides.map(({ title }, index) => (
             <Slide key={index} right={!!(index % 2)} {...{ title }} />
           ))}
-          {/* <Slide label="Relaxed" />
-          <Slide label="Playful" right />
-          <Slide label="Excentric" />
-          <Slide label="Funky" right /> */}
         </Animated.ScrollView>
       </Animated.View>
       <View style={styles.footer}>
         <Animated.View
           style={{ ...StyleSheet.absoluteFillObject, backgroundColor }}
         />
-        <Animated.View
-          style={[
-            styles.footerContainer,
-            { width: width * slides.length },
-            { transform: [{ translateX: multiply(x, -1) }] }
-          ]}
-        >
-          {slides.map(({ subtitle, description }, index) => (
-            <SubSlide
-              key={index}
-              last={index === slides.length - 1}
-              {...{ subtitle, description }}
-              onPress={() => {
-                if (scroll.current) {
-                  scroll.current
-                    .getNode()
-                    .scrollTo({ x: width * (index + 1), animated: true });
-                }
-              }}
-            />
-          ))}
-        </Animated.View>
+        <View style={styles.footerContent}>
+          <View style={styles.pagination}>
+            {slides.map((_, index) => (
+              <Dot key={index} currentIndex={divide(x, width)} {...{ index }} />
+            ))}
+          </View>
+          <Animated.View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              width: width * slides.length,
+              transform: [{ translateX: multiply(x, -1) }]
+            }}
+          >
+            {slides.map(({ subtitle, description }, index) => (
+              <SubSlide
+                key={index}
+                last={index === slides.length - 1}
+                {...{ subtitle, description }}
+                onPress={() => {
+                  if (scroll.current) {
+                    scroll.current
+                      .getNode()
+                      .scrollTo({ x: width * (index + 1), animated: true });
+                  }
+                }}
+              />
+            ))}
+          </Animated.View>
+        </View>
       </View>
     </View>
   );
@@ -116,11 +124,17 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: BORDER_RADIUS
   },
   footer: { flex: 1 },
-  footerContainer: {
+  footerContent: {
     flex: 1,
-    flexDirection: "row",
     backgroundColor: colors.white,
     borderTopLeftRadius: BORDER_RADIUS
+  },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: BORDER_RADIUS,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
   }
 });
 
