@@ -1,12 +1,13 @@
 import React from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { View, StyleSheet, Text, Dimensions, Image } from "react-native";
 import colors from "../../config/colors";
 
 const { width, height } = Dimensions.get("window");
 
 export const SLIDE_HEIGHT = 0.61 * height;
+export const BORDER_RADIUS = 75;
 
-function Slide({ title, right }) {
+function Slide({ title, right, image }) {
   const transform = [
     { translateY: (SLIDE_HEIGHT - 100) / 2 },
     { translateX: right ? width / 2 - 50 : -width / 2 + 50 },
@@ -15,6 +16,10 @@ function Slide({ title, right }) {
 
   return (
     <View style={styles.container}>
+      <View style={styles.underlay}>
+        <Image source={image} style={styles.image} />
+      </View>
+
       <View style={[styles.styleContainer, { transform }]}>
         <Text style={styles.title}>{title}</Text>
       </View>
@@ -34,6 +39,16 @@ const styles = StyleSheet.create({
     fontFamily: "SF-Pro-bold",
     color: colors.white,
     textAlign: "center"
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end"
+  },
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    height: undefined,
+    width: undefined,
+    borderBottomRightRadius: BORDER_RADIUS
   }
 });
 

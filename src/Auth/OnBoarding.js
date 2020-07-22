@@ -9,7 +9,7 @@ import {
 } from "react-native-redash";
 import Animated, { multiply, divide } from "react-native-reanimated";
 
-import Slide, { SLIDE_HEIGHT } from "./../components/Slide";
+import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./../components/Slide";
 import SubSlide from "../components/SubSlide";
 import colors from "../../config/colors";
 import Dot from "../components/Dot";
@@ -22,32 +22,34 @@ const slides = [
     subtitle: "Find Your Outfits",
     description:
       "Confused about your outfit? Don't worry! Find the best outfit here!",
-    color: "#BFEAF5"
+    color: "#BFEAF5",
+    image: require("./../../assets/1.png")
   },
   {
     title: "Playful",
     subtitle: "Hear it First, Wear it First",
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
-    color: "#BEECC4"
+    color: "#BEECC4",
+    image: require("./../../assets/2.png")
   },
   {
     title: "Excentric",
     subtitle: "Your Style, Your Way",
     description:
       " Create your individual & unique style and look amazing everyday",
-    color: "#FFE4D9"
+    color: "#FFE4D9",
+    image: require("./../../assets/3.png")
   },
   {
     title: "Funky",
     subtitle: "Look Good, Feel Good",
     description:
       "Discover the latest trends in fashion and explore your personality",
-    color: "#FFDDDD"
+    color: "#FFDDDD",
+    image: require("./../../assets/4.png")
   }
 ];
-
-const BORDER_RADIUS = 75;
 
 function OnBoarding() {
   const scroll = useRef(null);
@@ -70,8 +72,8 @@ function OnBoarding() {
           bounces={false}
           {...scrollHandler}
         >
-          {slides.map(({ title }, index) => (
-            <Slide key={index} right={!!(index % 2)} {...{ title }} />
+          {slides.map(({ title, image }, index) => (
+            <Slide key={index} right={!!(index % 2)} {...{ title, image }} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
