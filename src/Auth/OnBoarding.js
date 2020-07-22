@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { View, StyleSheet, Dimensions, StatusBar } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useValue, onScrollEvent, interpolateColor } from "react-native-redash";
@@ -44,6 +44,7 @@ const slides = [
 const BORDER_RADIUS = 75;
 
 function OnBoarding() {
+  const scroll = useRef(null);
   const x = useValue(0);
   const onScroll = onScrollEvent({ x });
   const backgroundColor = interpolateColor(x, {
@@ -56,6 +57,7 @@ function OnBoarding() {
       <StatusBar backgroundColor="white" barStyle={"dark-content"} />
       <Animated.View style={[styles.slider, { backgroundColor }]}>
         <Animated.ScrollView
+          ref={scroll}
           horizontal
           snapToInterval={width}
           decelerationRate="fast"
@@ -89,6 +91,13 @@ function OnBoarding() {
               key={index}
               last={index === slides.length - 1}
               {...{ subtitle, description }}
+              onPress={() => {
+                if (scroll.current) {
+                  scroll.current
+                    .getNode()
+                    .scrollTo({ x: width * (index + 1), animated: true });
+                }
+              }}
             />
           ))}
         </Animated.View>
@@ -98,7 +107,10 @@ function OnBoarding() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.white },
+  container: {
+    flex: 1,
+    backgroundColor: colors.white
+  },
   slider: {
     height: SLIDE_HEIGHT,
     borderBottomRightRadius: BORDER_RADIUS

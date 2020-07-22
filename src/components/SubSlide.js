@@ -1,12 +1,21 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+
+import Button from "./Button";
 import colors from "../../config/colors";
 
-function SubSlide({ subtitle, description, last }) {
+function SubSlide({ subtitle, description, last, onPress }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.subtitle}>{subtitle}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <View style={styles.title_descContainer}>
+        <Text style={styles.subtitle}>{subtitle}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+      <Button
+        label={last ? "Let's get started" : "Next"}
+        variant={last ? "primary" : "default"}
+        {...{ onPress }}
+      />
     </View>
   );
 }
@@ -14,9 +23,12 @@ function SubSlide({ subtitle, description, last }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     alignItems: "center",
-    padding: 44
+    padding: 30
+  },
+  title_descContainer: {
+    alignItems: "center"
   },
   subtitle: {
     fontFamily: "SF-Pro-semi",

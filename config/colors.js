@@ -5,5 +5,7 @@ export default {
   light: "#f8f4f4",
   dark: "#0C0D34",
   danger: "#ff5252",
-  warning: "#ffe66d"
+  warning: "#ffe66d",
+  primary: "#2CB9B0",
+  default: "rgba(12, 13, 52, 0.05)"
 };
