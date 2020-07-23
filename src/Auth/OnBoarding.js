@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { View, StyleSheet, Dimensions, StatusBar } from "react-native";
+import { View, StyleSheet, Dimensions, StatusBar, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import {
   useValue,
@@ -7,7 +7,12 @@ import {
   interpolateColor,
   useScrollHandler
 } from "react-native-redash";
-import Animated, { multiply, divide } from "react-native-reanimated";
+import Animated, {
+  multiply,
+  divide,
+  interpolate,
+  Extrapolate
+} from "react-native-reanimated";
 
 import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./../components/Slide";
 import SubSlide from "../components/SubSlide";
@@ -23,7 +28,11 @@ const slides = [
     description:
       "Confused about your outfit? Don't worry! Find the best outfit here!",
     color: "#BFEAF5",
-    image: require("./../../assets/1.png")
+    image: {
+      src: require("./../../assets/1.png"),
+      height: 1000,
+      width: 750
+    }
   },
   {
     title: "Playful",
@@ -31,7 +40,11 @@ const slides = [
     description:
       "Hating the clothes in your wardrobe? Explore hundreds of outfit ideas",
     color: "#BEECC4",
-    image: require("./../../assets/2.png")
+    image: {
+      src: require("./../../assets/2.png"),
+      height: 1000,
+      width: 710
+    }
   },
   {
     title: "Excentric",
@@ -39,7 +52,11 @@ const slides = [
     description:
       " Create your individual & unique style and look amazing everyday",
     color: "#FFE4D9",
-    image: require("./../../assets/3.png")
+    image: {
+      src: require("./../../assets/3.png"),
+      height: 1000,
+      width: 750
+    }
   },
   {
     title: "Funky",
@@ -47,7 +64,11 @@ const slides = [
     description:
       "Discover the latest trends in fashion and explore your personality",
     color: "#FFDDDD",
-    image: require("./../../assets/4.png")
+    image: {
+      src: require("./../../assets/4.png"),
+      height: 1000,
+      width: 750
+    }
   }
 ];
 
@@ -63,6 +84,32 @@ function OnBoarding() {
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle={"dark-content"} />
       <Animated.View style={[styles.slider, { backgroundColor }]}>
+        {slides.map(({ image }, index) => {
+          const opacity = interpolate(x, {
+            inputRange: [
+              (index - 0.5) * width,
+              index * width,
+              (index + 0.5) * width
+            ],
+            outputRange: [0, 1, 0],
+            extrapolate: Extrapolate.CLAMP
+          });
+          return (
+            <Animated.View style={[styles.underlay, { opacity }]}>
+              <Image
+                source={image.src}
+                style={[
+                  styles.image,
+                  {
+                    width: width - BORDER_RADIUS,
+                    height:
+                      ((width - BORDER_RADIUS) * image.height) / image.width
+                  }
+                ]}
+              />
+            </Animated.View>
+          );
+        })}
         <Animated.ScrollView
           ref={scroll}
           horizontal
@@ -137,6 +184,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row"
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "flex-end",
+    alignItems: "center"
+  },
+  image: {
+    // ...StyleSheet.absoluteFillObject,
+    borderBottomRightRadius: BORDER_RADIUS
   }
 });
 
