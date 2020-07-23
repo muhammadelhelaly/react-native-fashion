@@ -22,5 +22,6 @@ export default {
       color: colors.dark,
       textAlign: "center"
     }
-  }
+  },
+  borderRadius: 75
 };

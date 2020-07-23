@@ -14,10 +14,12 @@ import Animated, {
   Extrapolate
 } from "react-native-reanimated";
 
-import Slide, { SLIDE_HEIGHT, BORDER_RADIUS } from "./../components/Slide";
+import Slide, { SLIDE_HEIGHT } from "./../components/Slide";
 import SubSlide from "../components/SubSlide";
 import colors from "../../config/colors";
 import Dot from "../components/Dot";
+import theme from "../../config/theme";
+import routes from "../../config/routes";
 
 const { width } = Dimensions.get("window");
 
@@ -72,7 +74,7 @@ const slides = [
   }
 ];
 
-function OnBoarding() {
+function OnBoarding({ navigation }) {
   const scroll = useRef(null);
   const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
@@ -95,15 +97,16 @@ function OnBoarding() {
             extrapolate: Extrapolate.CLAMP
           });
           return (
-            <Animated.View style={[styles.underlay, { opacity }]}>
+            <Animated.View style={[styles.underlay, { opacity }]} key={index}>
               <Image
                 source={image.src}
                 style={[
                   styles.image,
                   {
-                    width: width - BORDER_RADIUS,
+                    width: width - theme.borderRadius,
                     height:
-                      ((width - BORDER_RADIUS) * image.height) / image.width
+                      ((width - theme.borderRadius) * image.height) /
+                      image.width
                   }
                 ]}
               />
@@ -142,20 +145,24 @@ function OnBoarding() {
               transform: [{ translateX: multiply(x, -1) }]
             }}
           >
-            {slides.map(({ subtitle, description }, index) => (
-              <SubSlide
-                key={index}
-                last={index === slides.length - 1}
-                {...{ subtitle, description }}
-                onPress={() => {
-                  if (scroll.current) {
-                    scroll.current
-                      .getNode()
-                      .scrollTo({ x: width * (index + 1), animated: true });
-                  }
-                }}
-              />
-            ))}
+            {slides.map(({ subtitle, description }, index) => {
+              const last = index === slides.length - 1;
+              return (
+                <SubSlide
+                  key={index}
+                  {...{ subtitle, description, last }}
+                  onPress={() => {
+                    if (last) {
+                      navigation.navigate(routes.WELCOME);
+                    } else {
+                      scroll.current
+                        .getNode()
+                        .scrollTo({ x: width * (index + 1), animated: true });
+                    }
+                  }}
+                />
+              );
+            })}
           </Animated.View>
         </View>
       </View>
@@ -170,17 +177,17 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS
+    borderBottomRightRadius: theme.borderRadius
   },
   footer: { flex: 1 },
   footerContent: {
     flex: 1,
     backgroundColor: colors.white,
-    borderTopLeftRadius: BORDER_RADIUS
+    borderTopLeftRadius: theme.borderRadius
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: BORDER_RADIUS,
+    height: theme.borderRadius,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row"
@@ -192,7 +199,7 @@ const styles = StyleSheet.create({
   },
   image: {
     // ...StyleSheet.absoluteFillObject,
-    borderBottomRightRadius: BORDER_RADIUS
+    // borderBottomRightRadius: theme.borderRadius
   }
 });
 

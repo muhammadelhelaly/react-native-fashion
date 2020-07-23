@@ -7,5 +7,6 @@ export default {
   danger: "#ff5252",
   warning: "#ffe66d",
   primary: "#2CB9B0",
-  default: "rgba(12, 13, 52, 0.05)"
+  default: "rgba(12, 13, 52, 0.05)",
+  lightGrey: "#ededed"
 };
