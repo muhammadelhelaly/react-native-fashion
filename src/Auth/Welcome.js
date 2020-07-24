@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
+
 import theme from "../../config/theme";
 import colors from "../../config/colors";
 import Button from "../components/Button";
 import routes from "../../config/routes";
+import SliderImage from "../components/SliderImage";
 
-const { width } = Dimensions.get("window");
 const image = {
   src: require("./../../assets/5.png"),
   height: 1000,
@@ -16,17 +17,7 @@ function Welcome({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
-        <Image
-          source={image.src}
-          style={[
-            styles.image,
-            {
-              width: width - theme.borderRadius,
-              height:
-                ((width - theme.borderRadius) * image.height) / image.width
-            }
-          ]}
-        />
+        <SliderImage {...{ image }} />
       </View>
       <View style={styles.bottomSection}>
         <View style={styles.radius}></View>
@@ -65,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomRightRadius: theme.borderRadius,
     backgroundColor: colors.lightGrey,
-    justifyContent: "flex-end",
+    // justifyContent: "flex-end",
     alignItems: "center"
   },
   bottomSection: {

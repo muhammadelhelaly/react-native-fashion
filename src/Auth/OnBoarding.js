@@ -1,12 +1,6 @@
 import React, { useRef } from "react";
 import { View, StyleSheet, Dimensions, StatusBar, Image } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import {
-  useValue,
-  onScrollEvent,
-  interpolateColor,
-  useScrollHandler
-} from "react-native-redash";
+import { interpolateColor, useScrollHandler } from "react-native-redash";
 import Animated, {
   multiply,
   divide,
@@ -15,11 +9,12 @@ import Animated, {
 } from "react-native-reanimated";
 
 import Slide, { SLIDE_HEIGHT } from "./../components/Slide";
-import SubSlide from "../components/SubSlide";
-import colors from "../../config/colors";
-import Dot from "../components/Dot";
-import theme from "../../config/theme";
-import routes from "../../config/routes";
+import SubSlide from "./../components/SubSlide";
+import colors from "./../../config/colors";
+import Dot from "./../components/Dot";
+import theme from "./../../config/theme";
+import routes from "./../../config/routes";
+import SliderImage from "../components/SliderImage";
 
 const { width } = Dimensions.get("window");
 
@@ -98,18 +93,7 @@ function OnBoarding({ navigation }) {
           });
           return (
             <Animated.View style={[styles.underlay, { opacity }]} key={index}>
-              <Image
-                source={image.src}
-                style={[
-                  styles.image,
-                  {
-                    width: width - theme.borderRadius,
-                    height:
-                      ((width - theme.borderRadius) * image.height) /
-                      image.width
-                  }
-                ]}
-              />
+              <SliderImage {...{ image }} />
             </Animated.View>
           );
         })}

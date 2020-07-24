@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   },
   backButtonContainer: {
     ...StyleSheet.absoluteFillObject,
-    top: 44,
-    left: 20
+    top: 50,
+    left: 25
   },
   backButton: {
     height: 30,
