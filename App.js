@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./navigation/AuthNavigator";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
@@ -20,7 +21,8 @@ const loadAssets = async () => {
     require("./assets/2.png"),
     require("./assets/3.png"),
     require("./assets/4.png"),
-    require("./assets/5.png")
+    require("./assets/5.png"),
+    require("./assets/bg-pattern.png")
   ];
 
   const cacheImages = images.map(image => {
@@ -53,7 +55,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <AuthNavigator />
+      <SafeAreaProvider>
+        <AuthNavigator />
+      </SafeAreaProvider>
     </NavigationContainer>
   );
 }

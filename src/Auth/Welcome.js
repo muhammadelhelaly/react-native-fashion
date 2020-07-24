@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
 import theme from "../../config/theme";
 import colors from "../../config/colors";
 import Button from "../components/Button";
+import routes from "../../config/routes";
 
 const { width } = Dimensions.get("window");
 const image = {
@@ -11,7 +12,7 @@ const image = {
   width: 750
 };
 
-function Welcome(props) {
+function Welcome({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
@@ -41,7 +42,11 @@ function Welcome(props) {
               justifyContent: "space-evenly"
             }}
           >
-            <Button label="Have an account? Login" variant="primary" />
+            <Button
+              label="Have an account? Login"
+              variant="primary"
+              onPress={() => navigation.navigate(routes.LOGIN)}
+            />
             <Button label="Join us, it's free" variant="light" />
             <Button label="Forget password?" />
           </View>
