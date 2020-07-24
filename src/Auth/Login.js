@@ -6,13 +6,13 @@ import Container from "../components/Container";
 import SocialLogins from "../components/SocialLogins";
 import colors from "../../config/colors";
 
-function Login() {
+function Login({ navigation }) {
   const footer = (
     <>
       <SocialLogins />
       <View
         style={{
-          paddingTop: 20,
+          paddingVertical: 20,
           // flex: 1,
           flexDirection: "row",
           justifyContent: "center",
@@ -29,7 +29,7 @@ function Login() {
     </>
   );
   return (
-    <Container {...{ footer }}>
+    <Container {...{ footer, navigation }}>
       <View></View>
     </Container>
   );

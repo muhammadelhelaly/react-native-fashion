@@ -1,6 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Feather } from "@expo/vector-icons";
+import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
 
 import theme from "../../config/theme";
 import colors from "../../config/colors";
@@ -11,7 +13,7 @@ const height = width * aspectRatio;
 
 const imagePath = "./../../assets/bg-pattern.png";
 
-function Container({ children, footer }) {
+function Container({ children, footer, navigation }) {
   const insets = useSafeAreaInsets();
   return (
     <View style={styles.container}>
@@ -30,6 +32,11 @@ function Container({ children, footer }) {
           ]}
         />
         <View style={styles.content}>{children}</View>
+      </View>
+      <View style={styles.backButtonContainer}>
+        <RectButton style={styles.backButton} onPress={() => navigation.pop()}>
+          <Feather name="chevron-left" size={24} color={colors.darkBlue} />
+        </RectButton>
       </View>
       <View style={[styles.footer, { paddingBottom: insets.bottom }]}>
         {footer}
@@ -68,6 +75,19 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkBlue,
     paddingTop: 30
     // height: 200
+  },
+  backButtonContainer: {
+    ...StyleSheet.absoluteFillObject,
+    top: 44,
+    left: 20
+  },
+  backButton: {
+    height: 30,
+    width: 30,
+    backgroundColor: colors.white,
+    borderRadius: 15,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 
