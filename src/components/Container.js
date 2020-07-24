@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
 
 import theme from "../../config/theme";
@@ -35,7 +35,11 @@ function Container({ children, footer, navigation }) {
       </View>
       <View style={styles.backButtonContainer}>
         <RectButton style={styles.backButton} onPress={() => navigation.pop()}>
-          <Feather name="chevron-left" size={24} color={colors.darkBlue} />
+          <Ionicons
+            name="ios-arrow-round-back"
+            size={24}
+            color={colors.white}
+          />
         </RectButton>
       </View>
       <View style={[styles.footer, { paddingBottom: insets.bottom }]}>
@@ -63,7 +67,8 @@ const styles = StyleSheet.create({
   },
   screenContaint: {
     flex: 1,
-    overflow: "hidden"
+    overflow: "hidden",
+    zIndex: 99
   },
   content: {
     borderRadius: theme.borderRadius,
@@ -74,7 +79,6 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: colors.darkBlue,
     paddingTop: 30
-    // height: 200
   },
   backButtonContainer: {
     ...StyleSheet.absoluteFillObject,
@@ -82,10 +86,10 @@ const styles = StyleSheet.create({
     left: 25
   },
   backButton: {
-    height: 30,
-    width: 30,
-    backgroundColor: colors.white,
-    borderRadius: 15,
+    height: 44,
+    width: 44,
+    backgroundColor: colors.primary,
+    borderRadius: 22,
     justifyContent: "center",
     alignItems: "center"
   }

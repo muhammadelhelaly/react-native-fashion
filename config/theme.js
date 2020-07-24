@@ -19,7 +19,7 @@ export default {
       fontFamily: "SF-Pro",
       fontSize: 18,
       lineHeight: 24,
-      color: colors.dark,
+      color: colors.medium,
       textAlign: "center"
     }
   },
