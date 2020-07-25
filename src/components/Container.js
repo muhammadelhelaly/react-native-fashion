@@ -1,11 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Image, Dimensions, StatusBar } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import { RectButton, TouchableOpacity } from "react-native-gesture-handler";
 
 import theme from "../../config/theme";
 import colors from "../../config/colors";
+import BackButton from "./BackButton";
 
 const { width } = Dimensions.get("window");
 const aspectRatio = 750 / 1488;
@@ -33,15 +32,7 @@ function Container({ children, footer, navigation }) {
         />
         <View style={styles.content}>{children}</View>
       </View>
-      <View style={styles.backButtonContainer}>
-        <RectButton style={styles.backButton} onPress={() => navigation.pop()}>
-          <Ionicons
-            name="ios-arrow-round-back"
-            size={24}
-            color={colors.white}
-          />
-        </RectButton>
-      </View>
+      <BackButton color={colors.darkBlue} {...{ navigation }} />
       <View style={[styles.footer, { paddingBottom: insets.bottom }]}>
         {footer}
       </View>
@@ -79,19 +70,6 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: colors.darkBlue,
     paddingTop: 30
-  },
-  backButtonContainer: {
-    ...StyleSheet.absoluteFillObject,
-    top: 50,
-    left: 25
-  },
-  backButton: {
-    height: 44,
-    width: 44,
-    backgroundColor: colors.primary,
-    borderRadius: 22,
-    justifyContent: "center",
-    alignItems: "center"
   }
 });
 
