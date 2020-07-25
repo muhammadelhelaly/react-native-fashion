@@ -30,10 +30,15 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required()
     .min(4)
-    .label("Password")
+    .label("Password"),
+  confirmPassword: Yup.string()
+    .required()
+    .min(4)
+    .label("Confirm Password")
+    .oneOf([Yup.ref("password"), null], "Passwords do not match")
 });
 
-function Login({ navigation }) {
+function SignUp({ navigation }) {
   const footer = (
     <>
       <SocialLogins />
@@ -45,12 +50,12 @@ function Login({ navigation }) {
           alignItems: "center"
         }}
       >
-        <Text style={{ color: colors.white }}>Don't have an account?</Text>
+        <Text style={{ color: colors.white }}>Already have an account?</Text>
         <TouchableWithoutFeedback
-          onPress={() => navigation.navigate(routes.SIGNUP)}
+          onPress={() => navigation.navigate(routes.LOGIN)}
         >
           <Text style={{ color: colors.primary, paddingHorizontal: 5 }}>
-            Sign Up here
+            Login here
           </Text>
         </TouchableWithoutFeedback>
       </View>
@@ -66,19 +71,19 @@ function Login({ navigation }) {
 
   return (
     <Container
-      {...{ footer, rightRadius: true, leftRadius: false, navigation }}
+      {...{ footer, rightRadius: false, leftRadius: true, navigation }}
     >
       <ScrollView>
         <View style={styles.textContainer}>
           <Text style={[theme.text.subtitle, { paddingBottom: 15 }]}>
-            Welcome Back
+            Create account
           </Text>
           <Text style={[theme.text.description]}>
-            Use your credentials below and login to your account
+            Let's us know you name, email, and your password
           </Text>
         </View>
         <Form
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "", password: "", confirmPassword: "" }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
@@ -104,34 +109,16 @@ function Login({ navigation }) {
             secureTextEntry={!isVisiable}
             textContentType="password"
           />
-          <View style={styles.optionsRow}>
-            <RectButton
-              style={{ flexDirection: "row", marginTop: 10, marginBottom: 25 }}
-              onPress={() => setIsChecked(!isChecked)}
-            >
-              <View
-                style={[
-                  styles.checkBox,
-                  {
-                    backgroundColor: isChecked ? colors.primary : colors.white,
-                    borderColor: isChecked ? colors.primary : colors.lightGrey
-                  }
-                ]}
-              >
-                {isChecked && (
-                  <Entypo name="check" size={16} color={colors.white} />
-                )}
-              </View>
-              <Text style={{ paddingTop: 1 }}>Remember me</Text>
-            </RectButton>
-            <RectButton
-              style={{ flexDirection: "row", marginTop: 10, marginBottom: 35 }}
-              onPress={() => alert("clicked")}
-            >
-              <Text style={{ color: colors.primary }}>Forget password?</Text>
-            </RectButton>
-          </View>
-          <SubmitButton label="Log into your account" />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock-outline"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            secureTextEntry={!isVisiable}
+            textContentType="password"
+          />
+          <SubmitButton label="Create your account" />
         </Form>
       </ScrollView>
     </Container>
@@ -143,23 +130,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 30,
     paddingHorizontal: width / 6
-  },
-  optionsRow: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignContent: "center"
-  },
-  checkBox: {
-    borderWidth: 1,
-    borderRadius: 5,
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 5,
-    marginRight: 12
   }
 });
 
-export default Login;
+export default SignUp;

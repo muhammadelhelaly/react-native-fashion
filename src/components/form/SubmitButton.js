@@ -15,7 +15,7 @@ function SubmitButton({ label }) {
 }
 
 const styles = StyleSheet.create({
-  container: { justifyContent: "center", alignItems: "center" }
+  container: { justifyContent: "center", alignItems: "center", marginTop: 20 }
 });
 
 export default SubmitButton;

@@ -38,7 +38,11 @@ function Welcome({ navigation }) {
               variant="primary"
               onPress={() => navigation.navigate(routes.LOGIN)}
             />
-            <Button label="Join us, it's free" variant="light" />
+            <Button
+              label="Join us, it's free"
+              variant="light"
+              onPress={() => navigation.navigate(routes.SIGNUP)}
+            />
             <Button label="Forget password?" />
           </View>
         </View>

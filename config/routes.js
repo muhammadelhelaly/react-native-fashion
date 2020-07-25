@@ -1,5 +1,6 @@
 export default Object.freeze({
   ONBOARDING: "OnBoarding",
   WELCOME: "Welcome",
-  LOGIN: "Login"
+  LOGIN: "Login",
+  SIGNUP: "SignUp"
 });
