@@ -1,10 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import routes from "../config/routes";
 import OnBoarding from "../src/Auth/OnBoarding";
 import Welcome from "../src/Auth/Welcome";
 import Login from "../src/Auth/Login";
 import SignUp from "../src/Auth/SignUp";
+import ForgetPassword from "../src/Auth/ForgetPassword";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +37,11 @@ const AuthNavigator = () => (
     <Stack.Screen
       name={routes.SIGNUP}
       component={SignUp}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={routes.FORGETPASSWORD}
+      component={ForgetPassword}
       options={{ headerShown: false }}
     />
   </Stack.Navigator>

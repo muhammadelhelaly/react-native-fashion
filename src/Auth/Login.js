@@ -185,7 +185,7 @@ function Login({ navigation }) {
                   marginTop: 10,
                   marginBottom: 35
                 }}
-                onPress={() => alert("clicked")}
+                onPress={() => navigation.navigate(routes.FORGETPASSWORD)}
               >
                 <Text style={{ color: colors.primary }}>Forget password?</Text>
               </RectButton>
