@@ -13,7 +13,6 @@ import {
 } from "react-native-gesture-handler";
 import * as Yup from "yup";
 import { Entypo } from "@expo/vector-icons";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 import {
   ErrorMessage,
@@ -26,6 +25,7 @@ import SocialLogins from "../../components/SocialLogins";
 import colors from "../../config/colors";
 import theme from "../../config/theme";
 import routes from "../../config/routes";
+import useAuth from "../../auth/useAuth";
 
 const { width, height: wHeight } = Dimensions.get("window");
 
@@ -41,6 +41,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function Login({ navigation }) {
+  const auth = useAuth();
+
   const [contentHeight, setContentHeight] = useState(0);
   const [footerHeight, setFooterHeight] = useState(0);
   const [allowScolling, setAllowScolling] = useState(false);
@@ -73,7 +75,7 @@ function Login({ navigation }) {
   );
 
   const handleSubmit = async ({ email, password }) => {
-    console.log(email, password);
+    await auth.logIn({ email });
   };
 
   const [isVisiable, setIsVisiable] = useState(false);
@@ -90,33 +92,20 @@ function Login({ navigation }) {
       setAllowScolling(true);
       setFooterHeight(height);
     }
-    // console.log(contentHeight + height);
-    // console.log(wHeight);
-    // console.log(height / wHeight);
   };
 
   return (
     <Container
       {...{ footer, rightRadius: true, leftRadius: false, navigation }}
     >
-      {/* <KeyboardAwareScrollView scrollEnabled={true}> */}
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior="padding"
         keyboardVerticalOffset={130}
-        // enableAutomaticScroll={false}
-        // styles={{ paddingBottom: footerHeight * 1.5 }}
-        // extraScrollHeight={20}
-        // enableResetScrollToCoords={false}
       >
         <ScrollView
           onLayout={event => find_dimesions(event.nativeEvent.layout)}
-          // scrollEnabled={allowScolling}
         >
-          {/* <KeyboardAwareScrollView
-            enableAutomaticScroll={false}
-            styles={{ paddingBottom: footerHeight * 1.5 }}
-          > */}
           <View style={styles.textContainer}>
             <Text style={[theme.text.subtitle, { paddingBottom: 15 }]}>
               Welcome Back
@@ -191,12 +180,9 @@ function Login({ navigation }) {
               </RectButton>
             </View>
             <SubmitButton label="Log into your account" />
-            {/* <View style={{ height: footerHeight }}></View> */}
           </Form>
-          {/* </KeyboardAwareScrollView> */}
         </ScrollView>
       </KeyboardAvoidingView>
-      {/* </KeyboardAwareScrollView> */}
     </Container>
   );
 }
