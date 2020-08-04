@@ -8,13 +8,13 @@ import Animated, {
   Extrapolate
 } from "react-native-reanimated";
 
-import Slide, { SLIDE_HEIGHT } from "./../components/Slide";
-import SubSlide from "./../components/SubSlide";
+import Slide, { SLIDE_HEIGHT } from "./../../components/Slide";
+import SubSlide from "./../../components/SubSlide";
 import colors from "./../../config/colors";
-import Dot from "./../components/Dot";
+import Dot from "./../../components/Dot";
 import theme from "./../../config/theme";
 import routes from "./../../config/routes";
-import SliderImage from "../components/SliderImage";
+import SliderImage from "../../components/SliderImage";
 
 const { width } = Dimensions.get("window");
 

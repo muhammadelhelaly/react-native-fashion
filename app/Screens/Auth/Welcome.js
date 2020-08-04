@@ -3,9 +3,9 @@ import { View, StyleSheet, Text } from "react-native";
 
 import theme from "../../config/theme";
 import colors from "../../config/colors";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import routes from "../../config/routes";
-import SliderImage from "../components/SliderImage";
+import SliderImage from "../../components/SliderImage";
 
 const image = {
   src: require("./../../assets/5.png"),

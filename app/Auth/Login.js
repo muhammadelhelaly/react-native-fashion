@@ -20,12 +20,12 @@ import {
   Form,
   FormField,
   SubmitButton
-} from "./../components/form";
+} from "../components/form";
 import Container, { HEADERHEIGHT } from "../components/Container";
 import SocialLogins from "../components/SocialLogins";
-import colors from "../../config/colors";
-import theme from "../../config/theme";
-import routes from "../../config/routes";
+import colors from "../config/colors";
+import theme from "../config/theme";
+import routes from "../config/routes";
 
 const { width, height: wHeight } = Dimensions.get("window");
 

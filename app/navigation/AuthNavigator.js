@@ -2,12 +2,12 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import routes from "../config/routes";
-import OnBoarding from "../src/Auth/OnBoarding";
-import Welcome from "../src/Auth/Welcome";
-import Login from "../src/Auth/Login";
-import SignUp from "../src/Auth/SignUp";
-import ForgetPassword from "../src/Auth/ForgetPassword";
-import PasswordChanged from "../src/Auth/PasswordChanged";
+import OnBoarding from "../Screens/Auth/OnBoarding";
+import Welcome from "../Screens/Auth/Welcome";
+import Login from "../Screens/Auth/Login";
+import SignUp from "../Screens/Auth/SignUp";
+import ForgetPassword from "../Screens/Auth/ForgetPassword";
+import PasswordChanged from "../Screens/Auth/PasswordChanged";
 
 const Stack = createStackNavigator();
 

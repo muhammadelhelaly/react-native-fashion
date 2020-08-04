@@ -12,8 +12,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 // import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import theme from "../../config/theme";
-import colors from "../../config/colors";
+import theme from "../config/theme";
+import colors from "../config/colors";
 import BackButton from "./BackButton";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -22,7 +22,7 @@ const aspectRatio = 750 / 1488;
 const height = width * aspectRatio;
 export const HEADERHEIGHT = height * 0.7;
 
-const imagePath = "./../../assets/bg-pattern.png";
+const imagePath = "./../assets/bg-pattern.png";
 
 function Container({ children, footer, rightRadius, leftRadius, navigation }) {
   const insets = useSafeAreaInsets();

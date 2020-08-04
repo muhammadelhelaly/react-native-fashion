@@ -3,11 +3,11 @@ import { View, Text, ScrollView, StyleSheet, Dimensions } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 
-import Button from "./../components/Button";
+import Button from "../components/Button";
 import Container from "../components/Container";
-import colors from "../../config/colors";
-import theme from "../../config/theme";
-import routes from "../../config/routes";
+import colors from "../config/colors";
+import theme from "../config/theme";
+import routes from "../config/routes";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");

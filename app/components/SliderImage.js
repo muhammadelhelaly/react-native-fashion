@@ -1,8 +1,8 @@
 import React from "react";
 import { Image, Dimensions } from "react-native";
 
-import deviceType from "../../utils/deviceType";
-import theme from "../../config/theme";
+import deviceType from "../utils/deviceType";
+import theme from "../config/theme";
 
 const { width } = Dimensions.get("window");
 

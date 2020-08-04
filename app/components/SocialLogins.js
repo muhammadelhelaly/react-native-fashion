@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Svg, { Path } from "react-native-svg";
 
-import colors from "../../config/colors";
+import colors from "../config/colors";
 
 const ICON_SIZE = 44;
 

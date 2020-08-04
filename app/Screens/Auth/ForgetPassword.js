@@ -9,9 +9,9 @@ import {
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 import * as Yup from "yup";
 
-import { Form, FormField, SubmitButton } from "./../components/form";
-import Container from "../components/Container";
-import SocialLogins from "../components/SocialLogins";
+import { Form, FormField, SubmitButton } from "../../components/form";
+import Container from "../../components/Container";
+import SocialLogins from "../../components/SocialLogins";
 import colors from "../../config/colors";
 import theme from "../../config/theme";
 import routes from "../../config/routes";

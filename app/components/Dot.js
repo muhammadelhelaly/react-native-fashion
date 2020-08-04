@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Animated, { interpolate, Extrapolate } from "react-native-reanimated";
-import colors from "../../config/colors";
+import colors from "../config/colors";
 
 function Dot({ index, currentIndex }) {
   const opacity = interpolate(currentIndex, {

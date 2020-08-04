@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import Button from "./Button";
-import theme from "../../config/theme";
+import theme from "./../config/theme";
 
 function SubSlide({ subtitle, description, last, onPress }) {
   return (

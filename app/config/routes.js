@@ -4,5 +4,6 @@ export default Object.freeze({
   LOGIN: "Login",
   SIGNUP: "SignUp",
   FORGETPASSWORD: "ForgetPassword",
-  PASSWORDCHANGED: "PasswordChanged"
+  PASSWORDCHANGED: "PasswordChanged",
+  HOME: "Home"
 });

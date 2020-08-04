@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 
-import theme from "./../../config/theme";
+import theme from "./../config/theme";
 
 const { width, height } = Dimensions.get("window");
 
