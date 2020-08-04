@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  KeyboardAvoidingView
+} from "react-native";
 import {
   TouchableWithoutFeedback,
   RectButton,
@@ -7,6 +13,8 @@ import {
 } from "react-native-gesture-handler";
 import * as Yup from "yup";
 import { Entypo } from "@expo/vector-icons";
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import {
   ErrorMessage,
@@ -14,13 +22,14 @@ import {
   FormField,
   SubmitButton
 } from "./../components/form";
-import Container from "../components/Container";
+
+import Container, { HEADERHEIGHT } from "../components/Container";
 import SocialLogins from "../components/SocialLogins";
 import colors from "../../config/colors";
 import theme from "../../config/theme";
 import routes from "../../config/routes";
 
-const { width } = Dimensions.get("window");
+const { width, height: wHeight } = Dimensions.get("window");
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -38,9 +47,19 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords do not match")
 });
 
+const find_dimesions = layout => {
+  const { x, y, width, height } = layout;
+
+  console.log(height);
+};
+
 function SignUp({ navigation }) {
+  const [contentHeight, setContentHeight] = useState(0);
+  const [footerHeight, setFooterHeight] = useState(0);
+  const [allowScolling, setAllowScolling] = useState(false);
+
   const footer = (
-    <>
+    <View onLayout={event => find_footerDimesions(event.nativeEvent.layout)}>
       <SocialLogins />
       <View
         style={{
@@ -59,7 +78,7 @@ function SignUp({ navigation }) {
           </Text>
         </TouchableWithoutFeedback>
       </View>
-    </>
+    </View>
   );
 
   const handleSubmit = async ({ email, password }) => {
@@ -67,60 +86,90 @@ function SignUp({ navigation }) {
   };
 
   const [isVisiable, setIsVisiable] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+
+  const find_dimesions = layout => {
+    const { x, y, width, height } = layout;
+    setContentHeight(height + HEADERHEIGHT);
+  };
+
+  const find_footerDimesions = layout => {
+    const { height } = layout;
+    if (contentHeight + height + 35 > wHeight) {
+      setAllowScolling(true);
+      setFooterHeight(height);
+    }
+  };
 
   return (
     <Container
       {...{ footer, rightRadius: false, leftRadius: true, navigation }}
     >
-      <ScrollView>
-        <View style={styles.textContainer}>
-          <Text style={[theme.text.subtitle, { paddingBottom: 15 }]}>
-            Create account
-          </Text>
-          <Text style={[theme.text.description]}>
-            Let's us know you name, email, and your password
-          </Text>
-        </View>
-        <Form
-          initialValues={{ email: "", password: "", confirmPassword: "" }}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior="padding"
+        keyboardVerticalOffset={130}
+        // behavior="padding"
+        // keyboardVerticalOffset={20}
+        // enableAutomaticScroll={false}
+        // styles={{ paddingBottom: footerHeight * 1.5 }}
+        // extraScrollHeight={20}
+        // enableResetScrollToCoords={false}
+      >
+        <ScrollView
+          onLayout={event => find_dimesions(event.nativeEvent.layout)}
+          style={{ flex: 1 }}
+          // style={{ paddingTop: 200 }}
+          // scrollEnabled={allowScolling}
         >
-          <ErrorMessage
-            error="Invalid email and/or password."
-            visible={false}
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email-outline"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Enter your email"
-            textContentType="emailAddress"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock-outline"
-            name="password"
-            placeholder="Enter your password"
-            secureTextEntry={!isVisiable}
-            textContentType="password"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock-outline"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            secureTextEntry={!isVisiable}
-            textContentType="password"
-          />
-          <SubmitButton label="Create your account" />
-        </Form>
-      </ScrollView>
+          <View style={styles.textContainer}>
+            <Text style={[theme.text.subtitle, { paddingBottom: 5 }]}>
+              Create account
+            </Text>
+            <Text style={[theme.text.description]}>
+              Let's us know you name, email, and your password
+            </Text>
+          </View>
+
+          <Form
+            initialValues={{ email: "", password: "", confirmPassword: "" }}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+          >
+            <ErrorMessage
+              error="Invalid email and/or password."
+              visible={false}
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email-outline"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Enter your email"
+              textContentType="emailAddress"
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock-outline"
+              name="password"
+              placeholder="Enter your password"
+              secureTextEntry={!isVisiable}
+              textContentType="password"
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock-outline"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              secureTextEntry={!isVisiable}
+              textContentType="password"
+            />
+            <SubmitButton label="Create your account" />
+          </Form>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </Container>
   );
 }

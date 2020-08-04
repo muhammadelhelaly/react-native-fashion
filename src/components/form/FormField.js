@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { UIManager, findNodeHandle } from "react-native";
 import { useFormikContext } from "formik";
 
 import TextInput from "./TextInput";
@@ -12,6 +13,8 @@ function AppFormField({ name, width, ...otherProps }) {
     touched,
     values
   } = useFormikContext();
+
+  const [focusedInputPosition, setFocusedInputPosition] = useState({});
 
   return (
     <>
