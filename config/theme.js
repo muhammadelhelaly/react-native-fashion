@@ -13,11 +13,12 @@ export default {
       fontFamily: "SF-Pro-semi",
       fontSize: 24,
       color: colors.dark,
-      marginBottom: 12
+      marginBottom: 12,
+      textAlign: "center"
     },
     description: {
       fontFamily: "SF-Pro",
-      fontSize: 18,
+      fontSize: 16,
       lineHeight: 24,
       color: colors.medium,
       textAlign: "center"

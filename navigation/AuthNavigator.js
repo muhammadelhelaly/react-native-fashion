@@ -7,6 +7,7 @@ import Welcome from "../src/Auth/Welcome";
 import Login from "../src/Auth/Login";
 import SignUp from "../src/Auth/SignUp";
 import ForgetPassword from "../src/Auth/ForgetPassword";
+import PasswordChanged from "../src/Auth/PasswordChanged";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ const AuthNavigator = () => (
     <Stack.Screen
       name={routes.FORGETPASSWORD}
       component={ForgetPassword}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={routes.PASSWORDCHANGED}
+      component={PasswordChanged}
       options={{ headerShown: false }}
     />
   </Stack.Navigator>

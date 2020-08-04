@@ -6,27 +6,17 @@ import {
   Dimensions,
   KeyboardAvoidingView
 } from "react-native";
-import {
-  TouchableWithoutFeedback,
-  RectButton,
-  ScrollView
-} from "react-native-gesture-handler";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
 import * as Yup from "yup";
-import { Entypo } from "@expo/vector-icons";
 
-import {
-  ErrorMessage,
-  Form,
-  FormField,
-  SubmitButton
-} from "./../components/form";
-import Container, { HEADERHEIGHT } from "../components/Container";
+import { Form, FormField, SubmitButton } from "./../components/form";
+import Container from "../components/Container";
 import SocialLogins from "../components/SocialLogins";
 import colors from "../../config/colors";
 import theme from "../../config/theme";
 import routes from "../../config/routes";
 
-const { width, height: wHeight } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -42,8 +32,8 @@ function ForgetPassword({ navigation }) {
     </View>
   );
 
-  const handleSubmit = async ({ email, password }) => {
-    console.log(email, password);
+  const handleSubmit = async ({ email }) => {
+    navigation.navigate(routes.PASSWORDCHANGED);
   };
 
   return (

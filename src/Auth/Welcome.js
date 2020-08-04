@@ -43,7 +43,10 @@ function Welcome({ navigation }) {
               variant="light"
               onPress={() => navigation.navigate(routes.SIGNUP)}
             />
-            <Button label="Forget password?" />
+            <Button
+              label="Forget password?"
+              onPress={() => navigation.navigate(routes.FORGETPASSWORD)}
+            />
           </View>
         </View>
       </View>
