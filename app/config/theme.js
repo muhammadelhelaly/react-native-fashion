@@ -22,6 +22,12 @@ export default {
       lineHeight: 24,
       color: colors.medium,
       textAlign: "center"
+    },
+    drawerItem: {
+      fontFamily: "SF-Pro-semi",
+      color: colors.dark, //2f304f
+      fontSize: 16,
+      lineHeight: 24
     }
   },
   borderRadius: 75
