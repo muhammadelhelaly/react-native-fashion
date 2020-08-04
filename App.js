@@ -7,6 +7,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
+import HomeNavigator from "./navigation/HomeNavigator";
 
 const loadAssets = async () => {
   await Font.loadAsync({
@@ -56,7 +57,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <SafeAreaProvider>
-        <AuthNavigator />
+        {/* check if user is authorized */}
+        {1 != 1 ? <AuthNavigator /> : <HomeNavigator />}
       </SafeAreaProvider>
     </NavigationContainer>
   );
