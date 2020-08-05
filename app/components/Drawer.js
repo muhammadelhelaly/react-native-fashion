@@ -23,6 +23,7 @@ import {
 import colors from "../config/colors";
 import theme from "../config/theme";
 import routes from "../config/routes";
+import useAuth from "./../auth/useAuth";
 
 const { width, height } = Dimensions.get("window");
 
@@ -35,7 +36,7 @@ const items = [
     color: "#2cb9b0",
     icon: <Ionicons name="ios-flash" size={24} color={colors.white} />,
     title: "Outfit Ideas",
-    navigateTo: ""
+    navigateTo: routes.OUTFITSIDEAS
   },
   {
     color: "#ff5e32",
@@ -67,11 +68,12 @@ const items = [
     color: "#0a0d36",
     icon: <FontAwesome name="sign-out" size={24} color={colors.white} />,
     title: "Logout",
-    navigateTo: ""
+    navigateTo: null
   }
 ];
 
 function DrawerContent({ navigation }) {
+  const { logOut } = useAuth();
   return (
     <>
       <StatusBar backgroundColor="white" barStyle={"light-content"} />
@@ -126,7 +128,14 @@ function DrawerContent({ navigation }) {
           </View>
           <View style={{ padding: 30 }}>
             {items.map(item => (
-              <TouchableOpacity key={item.title}>
+              <TouchableOpacity
+                key={item.title}
+                onPress={() =>
+                  item.navigateTo
+                    ? navigation.navigate(item.navigateTo)
+                    : logOut()
+                }
+              >
                 <View
                   style={{
                     flex: 1,
