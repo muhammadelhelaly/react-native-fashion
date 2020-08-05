@@ -89,7 +89,7 @@ function DrawerContent({ navigation }) {
                 />
               </RectButton>
               <Text style={{ color: colors.white }}>
-                {"My Profile".toUpperCase()}
+                {"Menu".toUpperCase()}
               </Text>
               <RectButton onPress={() => navigation.closeDrawer()}>
                 <SimpleLineIcons

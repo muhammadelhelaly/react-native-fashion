@@ -9,5 +9,7 @@ export default {
   primary: "#2CB9B0",
   default: "rgba(12, 13, 52, 0.05)",
   lightGrey: "#ededed",
+  tinyGrey: "#FAFAFA",
+  darkGrey: "#60627b",
   darkBlue: "#0C0D34"
 };
