@@ -6,7 +6,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import colors from "../config/colors";
 import theme from "../config/theme";
 
-const ICON_CONTAINER_SIZE = 40;
+const ICON_CONTAINER_SIZE = 44;
 
 function Screen({
   title,
@@ -16,9 +16,9 @@ function Screen({
   leftIconOnPress,
   rightIcon,
   rightIconOnPress,
+  cartItemsCount,
   children
 }) {
-  console.log();
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle={"dark-content"} />
@@ -45,9 +45,33 @@ function Screen({
           >
             {rightIcon}
           </View>
+          {cartItemsCount && (
+            <View
+              style={{
+                position: "absolute",
+                right: 0,
+                backgroundColor: colors.badge,
+                height: 18,
+                width: 18,
+                borderRadius: 9,
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Text
+                style={{
+                  color: colors.white,
+                  fontSize: 12,
+                  fontWeight: "bold"
+                }}
+              >
+                2
+              </Text>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
-      <View>{children}</View>
+      {children}
     </View>
   );
 }

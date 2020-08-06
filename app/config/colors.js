@@ -11,5 +11,7 @@ export default {
   lightGrey: "#ededed",
   tinyGrey: "#FAFAFA",
   darkGrey: "#60627b",
-  darkBlue: "#0C0D34"
+  darkBlue: "#0C0D34",
+  badge: "#1fb5aa",
+  pink: "#ff87a2"
 };
