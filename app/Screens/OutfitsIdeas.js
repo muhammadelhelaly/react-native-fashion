@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import { MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
+import { ScrollView } from "react-native-gesture-handler";
+import theme from "../config/theme";
 
 import Screen from "../components/Screen";
 import colors from "../config/colors";
-import { ScrollView } from "react-native-gesture-handler";
-import theme from "../config/theme";
+import deviceType from "./../utils/deviceType";
+import Card from "../components/Card";
 
 const { width, height } = Dimensions.get("window");
 
@@ -45,6 +47,7 @@ function OutfitsIdeas({ navigation }) {
       <View style={{ flex: 1 / 3 }}>
         <ScrollView
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             marginLeft: 20
           }}
@@ -65,7 +68,34 @@ function OutfitsIdeas({ navigation }) {
           ))}
         </ScrollView>
       </View>
-      <View style={{ flex: 1 / 3, backgroundColor: colors.primary }}>
+      {/* <View
+        style={{
+          // ...StyleSheet.absoluteFill,
+          position: "absolute",
+          top: height / 4 + 75,
+          left: width / 6,
+          // justifyContent: "center",
+          // alignItems: "center",
+          //   backgroundColor: colors.primary,
+          zIndex: 99
+          // paddingTop: height / 4
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: colors.primary,
+            width: width / 1.5,
+            height: height / 1.5 - 100,
+            borderRadius: 20
+          }}
+        ></View>
+      </View> */}
+      <View
+        style={{
+          flex: 1 / 3,
+          backgroundColor: colors.primary
+        }}
+      >
         <View
           style={{
             flex: 1,
@@ -81,6 +111,11 @@ function OutfitsIdeas({ navigation }) {
           //   overflow: "hidden"
         }}
       >
+        <View style={{ zIndex: 99, marginTop: 50 }}>
+          <Card position={1} />
+          <Card position={0.5} />
+          <Card position={0} />
+        </View>
         <View
           style={{
             height: height / 5,
@@ -88,7 +123,8 @@ function OutfitsIdeas({ navigation }) {
             position: "absolute",
             bottom: 0,
             left: 0,
-            right: 0
+            right: 0,
+            overflow: "hidden"
           }}
         >
           <View
@@ -113,7 +149,7 @@ function OutfitsIdeas({ navigation }) {
             style={{
               borderBottomRightRadius: theme.borderRadius,
               width: width + 4,
-              height: height / 4,
+              height: height / 4 + (deviceType.isPhone ? -6 : 12),
               marginLeft: -2
             }}
           />
