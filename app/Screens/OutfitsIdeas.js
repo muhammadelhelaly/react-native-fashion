@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, Dimensions } from "react-native";
 import { MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
 import { ScrollView } from "react-native-gesture-handler";
 import theme from "../config/theme";
@@ -8,6 +8,8 @@ import Screen from "../components/Screen";
 import colors from "../config/colors";
 import deviceType from "./../utils/deviceType";
 import Card from "../components/Card";
+import { useTransition } from "react-native-redash";
+import { sub } from "react-native-reanimated";
 
 const { width, height } = Dimensions.get("window");
 
@@ -23,7 +25,19 @@ const sliderItems = [
   { image: require("./../assets/outtfitslider_6.jpg"), isNew: false }
 ];
 
+const cards = [
+  { index: 3, image: require("./../assets/4.png") },
+  { index: 2, image: require("./../assets/3.png") },
+  { index: 1, image: require("./../assets/2.png") },
+  { index: 0, image: require("./../assets/1.png") }
+];
+
+const step = 1 / (cards.length - 1);
+
 function OutfitsIdeas({ navigation }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const aIndex = useTransition(currentIndex);
+
   const leftIcon = (
     <MaterialCommunityIcons name="menu" size={20} color={HEADERITEMSCOLOR} />
   );
@@ -68,28 +82,6 @@ function OutfitsIdeas({ navigation }) {
           ))}
         </ScrollView>
       </View>
-      {/* <View
-        style={{
-          // ...StyleSheet.absoluteFill,
-          position: "absolute",
-          top: height / 4 + 75,
-          left: width / 6,
-          // justifyContent: "center",
-          // alignItems: "center",
-          //   backgroundColor: colors.primary,
-          zIndex: 99
-          // paddingTop: height / 4
-        }}
-      >
-        <View
-          style={{
-            backgroundColor: colors.primary,
-            width: width / 1.5,
-            height: height / 1.5 - 100,
-            borderRadius: 20
-          }}
-        ></View>
-      </View> */}
       <View
         style={{
           flex: 1 / 3,
@@ -112,9 +104,18 @@ function OutfitsIdeas({ navigation }) {
         }}
       >
         <View style={{ zIndex: 99, marginTop: 50 }}>
-          <Card position={1} />
-          <Card position={0.5} />
-          <Card position={0} />
+          {cards.map(
+            item =>
+              currentIndex < item.index * step + step && (
+                <Card
+                  key={item.index}
+                  position={sub(item.index * step, aIndex)}
+                  onSwipe={() => setCurrentIndex(prev => prev + step)}
+                  image={item.image}
+                  step={step}
+                />
+              )
+          )}
         </View>
         <View
           style={{
