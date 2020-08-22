@@ -6,18 +6,18 @@ import {
   StatusBar,
   SafeAreaView,
   Image,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import {
   RectButton,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native-gesture-handler";
 import {
   MaterialCommunityIcons,
   SimpleLineIcons,
   Ionicons,
-  FontAwesome
+  FontAwesome,
 } from "@expo/vector-icons";
 
 import colors from "../config/colors";
@@ -36,19 +36,19 @@ const items = [
     color: "#2cb9b0",
     icon: <Ionicons name="ios-flash" size={24} color={colors.white} />,
     title: "Outfit Ideas",
-    navigateTo: routes.OUTFITSIDEAS
+    navigateTo: routes.OUTFITSIDEAS,
   },
   {
     color: "#ff5e32",
     icon: <Ionicons name="md-heart" size={24} color={colors.white} />,
     title: "Favorite Outfits",
-    navigateTo: ""
+    navigateTo: routes.FAVORITEOUTFITS,
   },
   {
     color: "#ffc641",
     icon: <Ionicons name="md-person" size={24} color={colors.white} />,
     title: "Edit Profile",
-    navigateTo: ""
+    navigateTo: "",
   },
   {
     color: "#ff89a3",
@@ -56,20 +56,20 @@ const items = [
       <MaterialCommunityIcons name="clock" size={24} color={colors.white} />
     ),
     title: "Transaction History",
-    navigateTo: ""
+    navigateTo: "",
   },
   {
     color: "#452cbb",
     icon: <Ionicons name="ios-settings" size={24} color={colors.white} />,
     title: "Notifications Settings",
-    navigateTo: ""
+    navigateTo: "",
   },
   {
     color: "#0a0d36",
     icon: <FontAwesome name="sign-out" size={24} color={colors.white} />,
     title: "Logout",
-    navigateTo: null
-  }
+    navigateTo: null,
+  },
 ];
 
 function DrawerContent({ navigation }) {
@@ -127,7 +127,7 @@ function DrawerContent({ navigation }) {
             <Text style={theme.text.description}>elhelaly@live.com</Text>
           </View>
           <View style={{ padding: 30 }}>
-            {items.map(item => (
+            {items.map((item) => (
               <TouchableOpacity
                 key={item.title}
                 onPress={() =>
@@ -141,7 +141,7 @@ function DrawerContent({ navigation }) {
                     flex: 1,
                     flexDirection: "row",
                     paddingVertical: 10,
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <View
@@ -152,7 +152,7 @@ function DrawerContent({ navigation }) {
                       borderRadius: 20,
                       marginRight: 15,
                       justifyContent: "center",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     {item.icon}
@@ -171,40 +171,40 @@ function DrawerContent({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white
+    backgroundColor: colors.white,
   },
   headerContainer: {
     flex: 0.22,
     backgroundColor: colors.darkBlue,
-    borderBottomRightRadius: theme.borderRadius
+    borderBottomRightRadius: theme.borderRadius,
   },
   headerTopRow: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 25
+    paddingHorizontal: 25,
   },
   headerBottomSection: {
     backgroundColor: colors.darkBlue,
-    height: theme.borderRadius * 2
+    height: theme.borderRadius * 2,
   },
   headerBottomRow: {
     flex: 1,
     backgroundColor: colors.white,
     borderTopLeftRadius: theme.borderRadius,
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   profileImageContainer: {
     marginTop: -PROFILEIMAGESIZE / 2,
     height: PROFILEIMAGESIZE,
     width: PROFILEIMAGESIZE,
     borderRadius: PROFILEIMAGESIZE / 2,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   profileImage: {
     height: PROFILEIMAGESIZE,
-    width: PROFILEIMAGESIZE
+    width: PROFILEIMAGESIZE,
   },
   footer: {
     position: "absolute",
@@ -212,19 +212,19 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     width: width,
-    height: FOOTER_HEIGHT
+    height: FOOTER_HEIGHT,
   },
   footerBackgroundImage: {
     width: width,
-    height: FOOTER_HEIGHT / 2
+    height: FOOTER_HEIGHT / 2,
   },
   body: {
     ...StyleSheet.absoluteFillObject,
     top: HEADER_HEIGHT,
     bottom: FOOTER_HEIGHT / 2,
     backgroundColor: colors.white,
-    borderBottomRightRadius: FOOTER_HEIGHT / 2
-  }
+    borderBottomRightRadius: FOOTER_HEIGHT / 2,
+  },
 });
 
 export default DrawerContent;

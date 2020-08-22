@@ -17,7 +17,7 @@ function Screen({
   rightIcon,
   rightIconOnPress,
   cartItemsCount,
-  children
+  children,
 }) {
   return (
     <View style={styles.container}>
@@ -27,7 +27,7 @@ function Screen({
           <View
             style={[
               styles.iconContainer,
-              { backgroundColor: iconContainerColor }
+              { backgroundColor: iconContainerColor },
             ]}
           >
             {leftIcon}
@@ -40,7 +40,7 @@ function Screen({
           <View
             style={[
               styles.iconContainer,
-              { backgroundColor: iconContainerColor }
+              { backgroundColor: iconContainerColor },
             ]}
           >
             {rightIcon}
@@ -55,14 +55,14 @@ function Screen({
                 width: 18,
                 borderRadius: 9,
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <Text
                 style={{
                   color: colors.white,
                   fontSize: 12,
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 2
@@ -80,21 +80,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: getStatusBarHeight() + 20
+    paddingTop: getStatusBarHeight() + 20,
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 25
+    paddingHorizontal: 35,
+    paddingBottom: 10,
   },
   iconContainer: {
     height: ICON_CONTAINER_SIZE,
     width: ICON_CONTAINER_SIZE,
     borderRadius: ICON_CONTAINER_SIZE / 2,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 export default Screen;

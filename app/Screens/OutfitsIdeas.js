@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Image, StyleSheet, Dimensions } from "react-native";
+import { View, Image, StyleSheet, Dimensions, Text } from "react-native";
 import { MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
 import theme from "../config/theme";
 
 import Screen from "../components/Screen";
@@ -17,19 +17,43 @@ const HEADERITEMSCOLOR = colors.dark;
 const SLIDERITEMHEIGHT = 70;
 
 const sliderItems = [
-  { image: require("./../assets/outtfitslider_1.jpg"), isNew: true },
-  { image: require("./../assets/outtfitslider_2.jpg"), isNew: true },
-  { image: require("./../assets/outtfitslider_3.jpg"), isNew: true },
-  { image: require("./../assets/outtfitslider_4.jpg"), isNew: false },
-  { image: require("./../assets/outtfitslider_5.jpg"), isNew: false },
-  { image: require("./../assets/outtfitslider_6.jpg"), isNew: false }
+  {
+    image: require("./../assets/outtfitslider_1.jpg"),
+    isNew: true,
+    title: "New in",
+  },
+  {
+    image: require("./../assets/outtfitslider_2.jpg"),
+    isNew: true,
+    title: "Summer",
+  },
+  {
+    image: require("./../assets/outtfitslider_3.jpg"),
+    isNew: true,
+    title: "Active",
+  },
+  {
+    image: require("./../assets/outtfitslider_4.jpg"),
+    isNew: false,
+    title: "Wear",
+  },
+  {
+    image: require("./../assets/outtfitslider_5.jpg"),
+    isNew: false,
+    title: "Outlet",
+  },
+  {
+    image: require("./../assets/outtfitslider_6.jpg"),
+    isNew: false,
+    title: "Accesories",
+  },
 ];
 
 const cards = [
   { index: 3, image: require("./../assets/4.png") },
   { index: 2, image: require("./../assets/3.png") },
   { index: 1, image: require("./../assets/2.png") },
-  { index: 0, image: require("./../assets/1.png") }
+  { index: 0, image: require("./../assets/1.png") },
 ];
 
 const step = 1 / (cards.length - 1);
@@ -59,58 +83,60 @@ function OutfitsIdeas({ navigation }) {
       cartItemsCount={2}
     >
       <View style={{ flex: 1 / 3 }}>
-        <ScrollView
-          horizontal={true}
+        <FlatList
+          data={sliderItems}
+          keyExtractor={(item) => item.image.toString()}
+          horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            marginLeft: 20
-          }}
-        >
-          {sliderItems.map(item => (
-            <View
-              key={item.image}
-              style={[
-                styles.sliderContainer,
-                { borderColor: item.isNew ? colors.primary : colors.white }
-              ]}
-            >
-              <Image
-                source={item.image}
-                style={{ height: SLIDERITEMHEIGHT, width: SLIDERITEMHEIGHT }}
-              />
+          renderItem={({ item }) => (
+            <View style={{ alignItems: "center" }}>
+              <View
+                style={[
+                  styles.sliderContainer,
+                  { borderColor: item.isNew ? colors.primary : colors.white },
+                ]}
+              >
+                <Image
+                  source={item.image}
+                  style={{ height: SLIDERITEMHEIGHT, width: SLIDERITEMHEIGHT }}
+                />
+              </View>
+              <Text style={{ paddingTop: 5, color: colors.medium }}>
+                {item.title}
+              </Text>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        ></FlatList>
       </View>
       <View
         style={{
           flex: 1 / 3,
-          backgroundColor: colors.primary
+          backgroundColor: colors.primary,
         }}
       >
         <View
           style={{
             flex: 1,
             backgroundColor: colors.white,
-            borderBottomEndRadius: theme.borderRadius
+            borderBottomEndRadius: theme.borderRadius,
           }}
         ></View>
       </View>
       <View
         style={{
-          flex: 2 / 3
+          flex: 2 / 3,
           //   borderBottomRightRadius: theme.borderRadius,
           //   overflow: "hidden"
         }}
       >
         <View style={{ zIndex: 99, marginTop: 50 }}>
           {cards.map(
-            item =>
+            (item) =>
               currentIndex < item.index * step + step && (
                 <Card
                   key={item.index}
                   position={sub(item.index * step, aIndex)}
-                  onSwipe={() => setCurrentIndex(prev => prev + step)}
+                  onSwipe={() => setCurrentIndex((prev) => prev + step)}
                   image={item.image}
                   step={step}
                 />
@@ -125,14 +151,14 @@ function OutfitsIdeas({ navigation }) {
             bottom: 0,
             left: 0,
             right: 0,
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           <View
             style={{
               flex: 1,
               backgroundColor: colors.darkBlue,
-              borderTopLeftRadius: theme.borderRadius
+              borderTopLeftRadius: theme.borderRadius,
             }}
           ></View>
         </View>
@@ -142,7 +168,7 @@ function OutfitsIdeas({ navigation }) {
             bottom: height / 5,
             backgroundColor: colors.darkBlue,
             borderTopLeftRadius: theme.borderRadius,
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           <Image
@@ -151,7 +177,7 @@ function OutfitsIdeas({ navigation }) {
               borderBottomRightRadius: theme.borderRadius,
               width: width + 4,
               height: height / 4 + (deviceType.isPhone ? -6 : 12),
-              marginLeft: -2
+              marginLeft: -2,
             }}
           />
         </View>
@@ -167,10 +193,10 @@ const styles = StyleSheet.create({
     borderRadius: SLIDERITEMHEIGHT / 2,
     backgroundColor: colors.warning,
     overflow: "hidden",
-    marginTop: 40,
+    marginTop: 20,
     marginHorizontal: 4,
-    borderWidth: 2
-  }
+    borderWidth: 2,
+  },
 });
 
 export default OutfitsIdeas;

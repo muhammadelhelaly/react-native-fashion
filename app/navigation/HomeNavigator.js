@@ -5,17 +5,18 @@ import routes from "../config/routes";
 import Main from "../Screens/Main";
 import DrawerContent from "../components/Drawer";
 import OutfitsIdeas from "../Screens/OutfitsIdeas";
+import FavoriteOutfits from "../Screens/FavoriteOutfits";
 
 const Drawer = createDrawerNavigator();
 
 const HomeNavigator = () => (
   <Drawer.Navigator
-    drawerContent={props => <DrawerContent {...props} />}
+    drawerContent={(props) => <DrawerContent {...props} />}
     drawerStyle={{ width: "100%" }}
   >
     <Drawer.Screen name={routes.HOME} component={Main} />
     <Drawer.Screen name={routes.OUTFITSIDEAS} component={OutfitsIdeas} />
-    {/* <Drawer.Screen name="Notifications" component={NotificationsScreen} /> */}
+    <Drawer.Screen name={routes.FAVORITEOUTFITS} component={FavoriteOutfits} />
   </Drawer.Navigator>
 );
 

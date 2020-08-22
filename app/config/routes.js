@@ -6,5 +6,6 @@ export default Object.freeze({
   FORGETPASSWORD: "ForgetPassword",
   PASSWORDCHANGED: "PasswordChanged",
   HOME: "Home",
-  OUTFITSIDEAS: "OutfitsIdeas"
+  OUTFITSIDEAS: "OutfitsIdeas",
+  FAVORITEOUTFITS: "FavoriteOutfits",
 });
