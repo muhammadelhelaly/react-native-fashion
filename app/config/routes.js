@@ -8,4 +8,5 @@ export default Object.freeze({
   HOME: "Home",
   OUTFITSIDEAS: "OutfitsIdeas",
   FAVORITEOUTFITS: "FavoriteOutfits",
+  TRANSACTIONHISTORY: "TransactionHistory",
 });

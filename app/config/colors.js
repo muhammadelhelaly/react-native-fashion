@@ -5,13 +5,16 @@ export default {
   light: "#f8f4f4",
   dark: "#0C0D34",
   danger: "#ff5252",
+  dangerLight: "#FFD7D8",
   warning: "#ffe66d",
+  warningLight: "#FFF7C0",
   primary: "#2CB9B0",
+  primaryLight: "#E7F5F8",
   default: "rgba(12, 13, 52, 0.05)",
   lightGrey: "#ededed",
   tinyGrey: "#FAFAFA",
   darkGrey: "#60627b",
   darkBlue: "#0C0D34",
   badge: "#1fb5aa",
-  pink: "#ff87a2"
+  pink: "#ff87a2",
 };

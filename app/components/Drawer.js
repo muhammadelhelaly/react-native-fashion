@@ -56,7 +56,7 @@ const items = [
       <MaterialCommunityIcons name="clock" size={24} color={colors.white} />
     ),
     title: "Transaction History",
-    navigateTo: "",
+    navigateTo: routes.TRANSACTIONHISTORY,
   },
   {
     color: "#452cbb",
