@@ -5,7 +5,7 @@ import theme from "../config/theme";
 import { color } from "react-native-reanimated";
 import colors from "../config/colors";
 
-function TopCurve({ footerHight }) {
+function TopCurve({ footerHight, color }) {
   const size = theme.borderRadius;
   return (
     <Svg
@@ -19,7 +19,7 @@ function TopCurve({ footerHight }) {
       }}
       viewBox="0 0 1 1"
     >
-      <Path d="M 0 1 A 0 0, 0, 0, 0, 1 0 L 1 1" fill={colors.darkBlue} />
+      <Path d="M 0 1 A 0 0, 0, 0, 0, 1 0 L 1 1" fill={color} />
     </Svg>
   );
 }

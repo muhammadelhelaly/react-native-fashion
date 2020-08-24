@@ -54,7 +54,7 @@ function FavoriteOutfits({ navigation }) {
       rightIconOnPress={() => console.log("Test")}
       cartItemsCount={2}
     >
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingBottom: footerHight }]}>
         <ScrollView style={styles.mainView}>
           <Transitioning.View ref={list} {...{ transition }}>
             <View
@@ -84,7 +84,7 @@ function FavoriteOutfits({ navigation }) {
           </Transitioning.View>
         </ScrollView>
       </View>
-      <TopCurve footerHight={footerHight} />
+      <TopCurve footerHight={footerHight} color={colors.darkBlue} />
       <View
         style={styles.footer}
         onLayout={(event) => setFooterHight(event.nativeEvent.layout.height)}
@@ -106,12 +106,10 @@ function FavoriteOutfits({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: colors.darkBlue,
   },
   mainView: {
     flex: 1,
     backgroundColor: colors.white,
-    //borderBottomRightRadius: 75,
     paddingTop: 20,
   },
   footer: {

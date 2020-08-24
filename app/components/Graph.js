@@ -4,7 +4,7 @@ import colors from "../config/colors";
 import GraphUnderlay from "./GraphUnderlay";
 
 const { width } = Dimensions.get("window");
-const aspectRatio = 185 / 305;
+const aspectRatio = 140 / 305;
 const height = width * aspectRatio;
 const BORDER_RADIUS = 15;
 const formatter = Intl.DateTimeFormat("en", { month: "short" });
